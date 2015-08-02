@@ -1,14 +1,17 @@
 
 <?php
 
-$fh =$_SERVER['REQUEST_METHOD']." ".$_SERVER['PHP_SELF']." HTTP/1.1</br>";
-$hds = getallheaders();
+$FirstLine =$_SERVER['REQUEST_METHOD']." ".$_SERVER['PHP_SELF']." HTTP/1.1</br>";
+$headers = getallheaders();
 $body = @file_get_contents('php://input');
 
-$page=$fh;
-foreach($hds as $h=>$v )
-    $page .= ($h.":".$v."</br>");
+$page=$FirstLine;
+foreach($headers as $header_=>$Value )
+    $page .= ($header_.":".$Value."</br>");
 
-    $page .= ("<br /> </br> ".$body);
+$page .= ("<br /> </br> ".$body);
+    
+    
+    
     echo $page;
 ?>
